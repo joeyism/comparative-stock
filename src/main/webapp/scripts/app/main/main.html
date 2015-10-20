@@ -1,0 +1,54 @@
+<div ng-class="{'after': loaded || showSearchList}" class="before">
+	<div>
+	</div>
+	<div class="title">Comparative Stocks</div>
+	<div class="center-row">
+		<form ng-submit="updateSearch()">
+			Search <input type="textbox" ng-model="stockSearch" class="textbox" placeholder="Input the name of the stock to search for..." autofocus style="width: 27%;">
+			<button class="button">Find Stock</button>
+		</form>
+		<button ng-click="showSearchList = !showSearchList" class="button">
+		<span ng-hide="showSearchList">Show</span>
+		<span ng-show="showSearchList">Hide</span>
+		Listings</button>
+	</div>
+	<div uib-collapse="!showSearchList">
+		<div class="search-list">
+			<div class="row">
+				<div class="col-xs-4 subtitle-1">Symbol</div>
+				<div class="col-xs-4 subtitle-1">Stock Name</div>
+				<div class="col-xs-4 subtitle-1">Exchange</div>
+			</div>
+			<div class="row keepList">
+				<div ng-repeat="(stock, bool) in checkboxModel track by $index"
+					class="col-xs-12" ng-if="bool">
+					<input type="checkbox" ng-model="checkboxModel[stock]"
+						name="cbG0{{$index}}" id="cbG0{{$index}}" class="css-checkbox">
+					</input> <label for="cbG0{{$index}}" class="css-label cb0">{{stock}}</label>
+				</div>
+			</div>
+			<div class="row">
+				<div ng-repeat="stock in searchResult track by $index">
+					<div class="col-xs-4">
+						<input type="checkbox" ng-model="checkboxModel[stock.Symbol]"
+							name="cbG{{$index}}" id="cbG{{$index}}" class="css-checkbox">
+						</input> <label for="cbG{{$index}}" class="css-label cb0">{{stock.Symbol}}</label>
+					</div>
+					<div class="col-xs-4">{{stock.Name}}</div>
+					<div class="col-xs-4">{{stock.Exchange}}</div>
+					<div class="clearfix"></div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="center-row">
+		<div>
+			Number of years to display: <input type="number" name="input"
+				class="input" ng-model="yearsback" min="1" max="99" required>
+		</div>
+		<button ng-click="submit()" class="button view-stocks">View Stocks</button>
+	</div>
+	<div uib-collapse="!loaded">
+		<highchart id="chart1" config="chartConfig"></highchart>
+	</div>
+</div>

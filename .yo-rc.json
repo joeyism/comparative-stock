@@ -1,0 +1,21 @@
+{
+  "generator-jhipster": {
+    "baseName": "comparativeStock",
+    "packageName": "com.joeyism.app",
+    "packageFolder": "com/joeyism/app",
+    "authenticationType": "session",
+    "hibernateCache": "no",
+    "clusteredHttpSession": "no",
+    "websocket": "no",
+    "databaseType": "mongodb",
+    "devDatabaseType": "mongodb",
+    "prodDatabaseType": "mongodb",
+    "searchEngine": "no",
+    "useCompass": false,
+    "buildTool": "maven",
+    "frontendBuilder": "grunt",
+    "javaVersion": "8",
+    "enableTranslation": true,
+    "rememberMeKey": "a966e1ab7112362ae151611f993fc2b5ca4ef929"
+  }
+}
