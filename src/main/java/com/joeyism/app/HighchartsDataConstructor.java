@@ -1,4 +1,4 @@
-package com.joeyism.app.web.rest;
+package com.joeyism.app;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;

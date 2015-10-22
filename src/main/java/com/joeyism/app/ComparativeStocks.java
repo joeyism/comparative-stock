@@ -1,11 +1,9 @@
-package com.joeyism.app.web.rest;
+package com.joeyism.app;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.stereotype.Controller;
 import com.codahale.metrics.annotation.Timed;
-import com.joeyism.app.domain.User;
-import com.joeyism.app.repository.UserRepository;
-import com.joeyism.app.security.AuthoritiesConstants;
-import com.joeyism.app.security.SecurityUtils;
-import com.joeyism.app.web.rest.dto.UserDTO;
 
 import org.apache.http.client.ClientProtocolException;
 import org.apache.http.client.HttpClient;
@@ -45,27 +43,12 @@ import java.util.Date;
 import java.util.Iterator;
 import java.util.List;
 
-/**
- * REST controller for managing users.
- */
-@RestController
+@Controller
 @RequestMapping("/api")
-public class UserResource {
+public class ComparativeStocks {
 
-	private final Logger log = LoggerFactory.getLogger(UserResource.class);
-
-	@Inject
-	private UserRepository userRepository;
-
-	/**
-	 * GET /users -> get all users.
-	 */
-	@RequestMapping(value = "/users", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
-	@Timed
-	public List<User> getAll() {
-		log.debug("REST request to get all Users");
-		return userRepository.findAll();
-	}
+	
+	private final Logger log = LoggerFactory.getLogger(ComparativeStocks.class);
 
 	/**
 	 * GET /getticker -> get all users.
@@ -74,7 +57,7 @@ public class UserResource {
 	 */
 	@RequestMapping(value = "/getticker", method = RequestMethod.GET, produces = MediaType.ALL_VALUE)
 	@Timed
-	public String getTicker() throws JSONException {
+	public @ResponseBody String getTicker() throws JSONException {
 		return "{}";
 	}
 
@@ -85,7 +68,7 @@ public class UserResource {
 	 */
 	@RequestMapping(value = "/getticker/{name}", method = RequestMethod.GET, produces = MediaType.ALL_VALUE)
 	@Timed
-	public String getTickerName(@PathVariable String name)
+	public @ResponseBody String getTickerName(@PathVariable String name)
 			throws JSONException {
 		RestTemplate restTemplate = new RestTemplate();
 		String result = restTemplate.getForObject(
@@ -108,8 +91,7 @@ public class UserResource {
 	 * @throws ParseException 
 	 */
 	@RequestMapping(value = "/submitstocks", method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE)
-	@ResponseBody
-	public ResponseEntity<?> postSubmitStocks(HttpEntity<String> httpEntity, @RequestParam("yearsback") int yearsback)
+	public @ResponseBody ResponseEntity<?> postSubmitStocks(HttpEntity<String> httpEntity, @RequestParam("yearsback") int yearsback)
 			throws JSONException, ClientProtocolException, IOException, ParseException {
 		String json = httpEntity.getBody();
 		JSONObject obj = new JSONObject(json);
@@ -152,14 +134,4 @@ public class UserResource {
 		return new ResponseEntity<>(results.toString(), HttpStatus.OK); 
 	}
 
-	/**
-	 * GET /users/:login -> get the "login" user.
-	 */
-	@RequestMapping(value = "/users/{login}", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
-	@Timed
-	ResponseEntity<User> getUser(@PathVariable String login) {
-		return userRepository.findOneByLogin(login)
-				.map(user -> new ResponseEntity<>(user, HttpStatus.OK))
-				.orElse(new ResponseEntity<>(HttpStatus.NOT_FOUND));
-	}
 }

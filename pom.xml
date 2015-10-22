@@ -44,6 +44,8 @@
         <spring-security.version>4.0.1.RELEASE</spring-security.version>
         <springfox.version>2.0.3</springfox.version>
         <usertype-core.version>4.0.0.GA</usertype-core.version>
+        
+        <start-class>com.joeyism.app.Application</start-class>
     </properties>
 
     <dependencies>
