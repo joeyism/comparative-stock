@@ -12,7 +12,7 @@ import org.apache.http.client.methods.HttpGet;
 import org.apache.http.impl.client.BasicResponseHandler;
 import org.apache.http.impl.client.DefaultHttpClient;
 import org.json.JSONArray;
-import org.json.JSONException;
+import org.json.JSONException; 
 import org.json.JSONObject;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -99,7 +99,6 @@ public class ComparativeStocks {
 		ParameterConstructor markitondemand = new ParameterConstructor();
 		markitondemand.addStocks(obj, yearsback);
 
-		RestTemplate restTemplate = new RestTemplate();
 		String url = "http://dev.markitondemand.com/Api/v2/InteractiveChart/json?parameters="
 				+ URLEncoder.encode(markitondemand.params(), "UTF-8");
 		
@@ -124,7 +123,7 @@ public class ComparativeStocks {
 		catch (Exception e){
 			System.out.println(e.toString());
 		}
-		finally {
+		finally { 
             // When HttpClient instance is no longer needed,
             // shut down the connection manager to ensure
             // immediate deallocation of all system resources
