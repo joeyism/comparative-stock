@@ -1,0 +1,11 @@
+<!DOCTYPE aspectj PUBLIC
+        "-//AspectJ//DTD//EN" "http://www.eclipse.org/aspectj/dtd/aspectj.dtd">
+<aspectj>
+	<weaver options="-verbose -showWeaveInfo">
+		<include within="com.joeyism..*" />
+	</weaver>
+	<aspects>
+		<!-- use only this aspect for weaving -->
+		<aspect name="com.joeyism.aspect.MemoryAspect" />
+	</aspects>
+</aspectj>

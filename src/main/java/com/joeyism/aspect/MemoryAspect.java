@@ -3,7 +3,9 @@ package com.joeyism.aspect;
 import org.aspectj.lang.ProceedingJoinPoint;
 import org.aspectj.lang.annotation.Around;
 import org.aspectj.lang.annotation.Aspect;
+import org.aspectj.lang.annotation.Before;
 import org.aspectj.lang.annotation.Pointcut;
+import org.springframework.stereotype.Component;
 
 import com.joeyism.app.LogMemory;
 
@@ -16,8 +18,9 @@ public class MemoryAspect {
 	@Pointcut("execution(* * (..))")
 	public void allMethods(){}
 	
-	@Around("allMethods()")
+	@Before("execution(* *(..))")
 	public Object aroundAllMethods(ProceedingJoinPoint joinPoint) throws Throwable{
+		System.out.println("aspecting");
 		LogMemory.inMb();
 		return joinPoint.proceed();
 	}
