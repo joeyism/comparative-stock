@@ -1,1 +1,1 @@
-web: java $JAVA_OPTS -cp target/classes:target/dependency/* comparative-stock
+web: java $JAVA_OPTS -Dserver.port=$PORT -jar target/comparativestock-0.0.1-SNAPSHOT.jar
